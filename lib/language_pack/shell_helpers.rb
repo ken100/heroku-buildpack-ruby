@@ -27,11 +27,21 @@ module LanguagePack
     end
 
     def self.initialize_env(path)
+      
+      puts "+++++++++++++++++++++++++++++++++++++++++++++"
+      puts path
+      puts "+++++++++++++++++++++++++++++++++++++++++++++"
+      
       env_dir = Pathname.new("#{path}")
       if env_dir.exist? && env_dir.directory?
         env_dir.each_child do |file|
           key   = file.basename.to_s
           value = file.read.strip
+
+          puts "+++++++++++++++++++++++++++++++++++++++++++++"
+          puts key + " : " + value
+          puts "+++++++++++++++++++++++++++++++++++++++++++++"
+
           user_env_hash[key] = value unless blacklist?(key)
         end
       end
